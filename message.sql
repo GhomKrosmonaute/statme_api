@@ -10,7 +10,8 @@ create table message
 	mention_count int not null,
 	has_everyone boolean not null,
 	has_embed boolean not null,
-	has_url boolean null,
+	has_url boolean not null,
+	created_timestamp timestamp default CURRENT_TIMESTAMP,
 	constraint message_pk
 		primary key (`index`)
-);
+); 
