@@ -1,9 +1,9 @@
 create table message
 (
 	`index` int auto_increment,
-	id bigint not null,
-	user_id bigint not null,
-	channel_id bigint not null,
+	id varchar(20) not null,
+	user_id varchar(20) not null,
+	channel_id varchar(20) not null,
 	content_length int not null,
 	word_count int not null,
 	emote_count int not null,
@@ -14,4 +14,4 @@ create table message
 	created_timestamp timestamp default CURRENT_TIMESTAMP,
 	constraint message_pk
 		primary key (`index`)
-); 
+);

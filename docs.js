@@ -8,8 +8,8 @@ module.exports = {
                 name: 'message_id',
                 type: 'SnowFlake',
                 comment: 'Discord Message id',
-                example: '<code>657137320121729000</code>',
-                default: '657137320121729000'
+                example: '<code>658433464626053165</code>',
+                default: '658433464626053165'
             },
             {
                 name: 'user_id',
@@ -23,16 +23,13 @@ module.exports = {
                 type: 'Columns',
                 comment: 'Needed properties separate by <code>|</code>',
                 example: 'id<code>|</code>word_count<code>|</code>length',
-                default: 'id|word_count|length'
+                default: 'id|word_count|content_length'
             }
         ]
     },
     types: {
         SnowFlake: {
-            validation: arg => {
-                const snowflake = parseInt(arg)
-                return isNaN(snowflake) ? false : snowflake
-            }
+            validation: arg => arg && /^\d{18,}$/.test(arg) ? `'${arg}'` : false
         },
         Columns: {
             validation: arg => {

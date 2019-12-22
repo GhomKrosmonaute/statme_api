@@ -18,6 +18,9 @@ const routes = {
 
             {path: '/message/user/:user_id/', method: 'fetchUser'},
             {path: '/message/author/:user_id/', method: 'fetchUser'},
+
+            {path: '/message/user/:user_id/count/', method: 'countUser'},
+            {path: '/message/author/:user_id/count/', method: 'countUser'},
         ]
     },
     html: [
