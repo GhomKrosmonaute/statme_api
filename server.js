@@ -1,7 +1,7 @@
 
 const fs = require('fs')
 const server = require('express')()
-const routes = require('./routes').html
+const routes = require('./routes').v1.html
 const routers = require('./router')
 
 const port = 2834

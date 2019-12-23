@@ -1,7 +1,7 @@
 
 const mysql         = require('mysql2')
 const database      = require('./database.json')
-const docs          = require('./docs').types
+const docs          = require('./docs').v1
 
 const db = mysql.createConnection(database)
 
@@ -10,11 +10,21 @@ db.connect()
 module.exports = {
     fetchLast:      ( req, res ) => resolve( res, 'SELECT * FROM `message` ORDER BY `created_timestamp` DESC LIMIT 1' ),
     fetchFirst:     ( req, res ) => resolve( res, 'SELECT * FROM `message` ORDER BY `created_timestamp` ASC LIMIT 1' ),
-    fetchAll:       ( req, res ) => resolve( res, 'SELECT * FROM `message`' ),
-    countAll:       ( req, res ) => resolve( res, 'SELECT COUNT(`index`) AS `countAll` FROM `message`' ),
-    fetchMessage:   ( req, res ) => _fetch( req, res, 'message_id', 'id' ),
-    fetchUser:      ( req, res ) => _fetch( req, res, 'user_id', 'user_id' ),
-    countUser:      ( req, res ) => _count( req, res, 'user_id', 'user_id' ),
+    fetchAll:       _fetch,
+    countAll:       _count,
+    fetchMessage:   _fetch,
+    fetchUser:      _fetch,
+    countUser:      _count,
+    fetchGuild:     _fetch,
+    countGuild:     _count,
+    fetchMember:    _fetch,
+    countMember:    _count,
+    fetchWords:     _temp,
+    countWords:     _temp,
+    fetchLength:    _temp,
+    countLength:    _temp,
+    fetchEveryone:  ( req, res ) => resolve( res, 'SELECT * FROM `message` WHERE `has_everyone` = 1' ),
+    countEveryone:  ( req, res ) => resolve( res, 'SELECT COUNT(`index`) AS `count` FROM `message` WHERE `has_everyone` = 1' ),
 }
 
 function resolve( res, query ){
@@ -26,27 +36,26 @@ function resolve( res, query ){
     })
 }
 
-function _fetch( req, res, param, col, type = 'SnowFlake' ){
+function _fetch( req, res, keywords ){
 
-    if(!col) col = param
+    if(!Array.isArray(keywords)) keywords = []
 
-    const value = docs[type].validation(req.params[param])
-    let cols = docs.Columns.validation(req.params.props)
+    const where = []
+    for(const param in req.params){
+        const doc = docs.props.find( d => d.name === param )
+        const value = docs.types[doc.type].validation(req.params[param])
+        if(value === false) return res.status(403).json({ error: `incorrect ${param} (${doc.type})` })
+        where.push(`\`${doc.corresponding}\` = ${value}`)
+    } if(where.length > 0) where[0] = 'WHERE ' + where[0]
 
-    if (!value) return res.status(403).json({ error: 'incorrect ' + type })
-    if (!cols) cols = '*'
-
-    resolve( res, 'SELECT ' + cols + ' FROM `message` WHERE `' + col + '` = ' + value)
-
+    let select = keywords.includes('count') ? 'COUNT(`index`) AS `count`' : '*'
+    resolve( res, `SELECT ${select} FROM \`message\` ${where.join(' AND ')}`)
 }
 
-function _count( req, res, param, col, type = 'SnowFlake' ){
+function _count( req, res ){
+    _fetch( req, res, ['count'] )
+}
 
-    if(!col) col = param
-
-    const value = docs[type].validation(req.params[param])
-    if (!value) return res.status(403).json({ error: 'incorrect ' + type })
-
-    resolve( res, 'SELECT COUNT(`index`) AS `countUserMessages` FROM `message` WHERE `' + col + '` = ' + value)
-
+function _temp( req, res ){
+    res.status(500).json({ error: 'this route is temporarily disabled' })
 }
