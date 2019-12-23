@@ -1,16 +1,30 @@
 
 const express       = require('express')
 const controller    = require('./controller')
-const routes        = require('./routes').v1.api
+const routes        = require('./routes')
 
-module.exports.v1 = (()=>{
-    const router = express.Router()
-    for(const method in routes){
-        routes[method].forEach( path => {
-            console.log('Route loaded:', path)
-            router.route(path).get(controller[method])
+const routers = {}
+for(const version in routes){
+    routers[version] = (()=>{
+        const router = express.Router()
+        routes[version].forEach( route => {
+            route.aliases.forEach( path => {
+                router.route(path).get(( req, res ) => {
+                    return controller[version].fetch( req, res, route.conditions )
+                })
+                console.log('Route loaded:', path)
+                route.actions.forEach( action => {
+                    const actionPath = path + action + '/'
+                    router.route(actionPath).get(( req, res ) => {
+                        return controller[version][action]( req, res, route.conditions )
+                    })
+                    console.log('Route loaded:', actionPath)
+                })
+            })
         })
-    }
-    console.log('Router ready:', router.stack.length, 'routes')
-    return router
-})()
+        console.log('Router ready:', router.stack.length, 'routes')
+        return router
+    })()
+}
+
+module.exports = routers

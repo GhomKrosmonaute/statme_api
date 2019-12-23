@@ -3,6 +3,7 @@ create table message
 	`index` int auto_increment,
 	id varchar(20) not null,
 	user_id varchar(20) not null,
+	guild_id varchar(20) not null,
 	channel_id varchar(20) not null,
 	content_length int not null,
 	word_count int not null,
