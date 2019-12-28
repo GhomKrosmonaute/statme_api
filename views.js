@@ -23,28 +23,47 @@ for(const version in routes){
         path: [`/statme/api/${version}/`],
         title: `Statme Discord bot API <span class=" font-weight-bold"> ${version} </span>`,
         content: `
-            <h2> Routes </h2>
+            <h2> Sommaire </h2>
+            <ol>
+                <li><a href="#routes"> Routes </a></li>
+                <li><a href="#arguments"> Arguments </a></li>
+            </ol>
+            <h2 id="routes"> Routes </h2>
             <table class="table rounded">
                 <tbody>
                     ${routes[version].map( route => {
                         const { result, actions, aliases } = route
                         return aliases.map( path => {
                             return [ false, ...actions ].map( action => {
-                                const PATH = action ? path + action + '/' : path
-                                let example = PATH.slice(0)
-                                doc.forEach( d => example = example.replace( new RegExp(`:${d.name}`, 'ig'), d.default ) )
-                                return `
-                                    <tr>
-                                        <td><a href="http://163.172.176.138:2834/statme/api/v1${ example }"> ${ PATH } </a></td>
-                                        <td><small> ${ action ? '<code>' + action + '();</code><span class="text-muted"> method on </span>' : '' }${ result } </small></td>
-                                    </tr>
-                                `
+                                if(!/min|max/.test(action)){
+                                    const PATH = action ? path + action + '/' : path
+                                    let example = PATH.slice(0)
+                                    doc.forEach( d => example = example.replace( new RegExp(`:${d.name}`, 'ig'), d.default ) )
+                                    return `
+                                        <tr>
+                                            <td><a href="http://163.172.176.138:2834/statme/api/v1${ example }"> ${ PATH } </a></td>
+                                            <td><small> ${ action ? '<code>' + action + '();</code><span class="text-muted"> method on </span>' : '' }${ result } </small></td>
+                                        </tr>
+                                    `
+                                }else{
+                                    return ['first','last','low','high','count'].map( subAction => {
+                                        const PATH = path + action + '/' + subAction + '/'
+                                        let example = PATH.slice(0)
+                                        doc.forEach( d => example = example.replace( new RegExp(`:${d.name}`, 'ig'), d.default ) )
+                                        return `
+                                            <tr>
+                                                <td><a href="http://163.172.176.138:2834/statme/api/v1${ example }"> ${ PATH } </a></td>
+                                                <td><small><code> ${ subAction + action[0].toUpperCase() + action.slice(1) }(); </code><span class="text-muted"> method on </span> ${ result } </small></td>
+                                            </tr>
+                                        `
+                                    }).join('')
+                                }
                             }).join('')
                         }).join('')
                     }).join('')}
                 </tbody>
             </table>
-            <h2> Arguments </h2>
+            <h2 id="arguments"> Arguments </h2>
             <table class="table rounded">
                 <thead>
                     <tr>

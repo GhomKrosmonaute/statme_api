@@ -28,21 +28,18 @@ const routes = {
             result: 'all guild messages'
         },
         {
-            aliases: [
-                '/message/member/:guild_id/:user_id/',
-                '/message/member/:user_id/:guild_id/'
-            ],
+            aliases: ['/message/member/:guild_id/:user_id/'],
             actions: ['first','last','count'],
             result: 'all member messages'
         },
         {
             aliases: ['/message/words/:word_count/'],
-            actions: ['first','last','count','max','min'],
+            actions: ['first','last','count','max','min','low','high'],
             result: 'all messages with {word_count} words'
         },
         {
             aliases: ['/message/length/:length/'],
-            actions: ['first','last','count','max','min'],
+            actions: ['first','last','count','max','min','low','high'],
             result: 'all {length}-letter long messages'
         },
         {
