@@ -1,4 +1,4 @@
-create table message
+create table `message`
 (
 	`index` int auto_increment,
 	id varchar(20) not null,
