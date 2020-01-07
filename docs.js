@@ -26,30 +26,11 @@ module.exports.v1 = {
             example: '<code>507389389098188820</code>',
             default: '507389389098188820',
             corresponding: 'guild_id'
-        },
-        {
-            name: 'word_count',
-            type: 'Number',
-            comment: 'Number of words wanted',
-            example: '<code>5</code>',
-            default: '5',
-            corresponding: 'word_count'
-        },
-        {
-            name: 'length',
-            type: 'Number',
-            comment: 'Message content length',
-            example: '<code>25</code>',
-            default: '25',
-            corresponding: 'content_length'
         }
     ],
     types: {
         SnowFlake: {
             validation: arg => arg && /^\d{18,}$/.test(arg) ? `'${arg}'` : false
-        },
-        Number: {
-            validation: arg => isNaN(Number(arg)) ? false : Number(arg)
         }
     }
 }

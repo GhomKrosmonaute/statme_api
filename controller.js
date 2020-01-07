@@ -1,11 +1,11 @@
 
+const Discord       = require('discord.js')
 const mysql         = require('mysql2')
-const database      = require('./database.json')
 const docs          = require('./docs').v1
+const config        = require('./config.json')
 
-const db = mysql.createConnection(database)
-
-db.connect()
+const client = new Discord.Client(); client.login(config.token)
+const db = mysql.createConnection(config.database); db.connect()
 
 module.exports.v1 = {
     fetch: fetch,
@@ -16,24 +16,14 @@ module.exports.v1 = {
     max: max,
     low: low,
     high: high,
-    firstMin: firstMin,
-    firstMax: firstMax,
-    lastMin: lastMin,
-    lastMax: lastMax,
-    countMin: countMin,
-    countMax: countMax,
-    lowMin: lowMin,
-    lowMax: lowMax,
-    highMax: highMax,
-    highMin: highMin,
 }
 
 function resolve( res, query ){
     db.query( query,( err, results, fields ) => {
         if(err){ console.error(err.message)
             res.status(500).json({ error: 'request error' })
-        } else res.status(200).json(results)
-        console.log( query, '\n', results )
+        } else res.status(200).json( prepare(results) )
+        console.log( err ? 'Error:' : 'Valid:', query )
     })
 }
 
@@ -72,15 +62,34 @@ function min( req, res, cond ){ fetch( req, res, cond, ['min'] ) } // list
 function max( req, res, cond ){ fetch( req, res, cond, ['max'] ) } // list
 function low( req, res, cond ){ fetch( req, res, cond, ['low'] ) } // element
 function high( req, res, cond ){ fetch( req, res, cond, ['high'] ) } // element
-function firstMin( req, res, cond ){ fetch( req, res, cond, ['min','first'] ) }
-function firstMax( req, res, cond ){ fetch( req, res, cond, ['max','first'] ) }
-function lastMin( req, res, cond ){ fetch( req, res, cond, ['min','last'] ) }
-function lastMax( req, res, cond ){ fetch( req, res, cond, ['max','last'] ) }
-function countMin( req, res, cond ){ fetch( req, res, cond, ['min','count'] ) }
-function countMax( req, res, cond ){ fetch( req, res, cond, ['max','count'] ) }
-function lowMin( req, res, cond ){ fetch( req, res, cond, ['min','low'] ) }
-function lowMax( req, res, cond ){ fetch( req, res, cond, ['max','low'] ) }
-function highMin( req, res, cond ){ fetch( req, res, cond, ['min','high'] ) }
-function highMax( req, res, cond ){ fetch( req, res, cond, ['max','high'] ) }
 
 function temp( req, res ){ res.status(500).json({ error: 'this route is temporarily disabled' }) }
+
+client.on('error', console.error )
+client.once('ready', done => {
+    client.ready = true
+    console.log('Connected to Statme Discord bot')
+})
+
+function prepare( results ){
+    if(!client.ready) return results
+    return results.map(result => {
+        if(client.users.has(result.user_id)){
+            const user = client.users.get(result.user_id)
+            result.user_name = user.username
+            result.user_image = user.avatarURL
+        }
+        if(client.guilds.has(result.guild_id)){
+            const guild = client.guilds.get(result.guild_id)
+            result.guild_name = guild.name
+            result.guild_image = guild.iconURL
+        }
+        if(client.channels.has(result.channel_id)){
+            const channel = client.channels.get(result.channel_id)
+            result.channel_name = channel.name
+        }
+        if(result.created_timestamp)
+        result.created_timestamp = new Date(result.created_timestamp).getTime()
+        return result
+    })
+}

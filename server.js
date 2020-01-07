@@ -24,7 +24,7 @@ for(const version in views){
 }
 
 for(const version in routers){
-    server.use( `/statme/api/${version}/`, routers[version] );
+    server.use( `/${version}/`, routers[version] );
 }
 
 server.listen( port, () => {

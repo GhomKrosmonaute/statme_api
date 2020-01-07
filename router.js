@@ -14,21 +14,11 @@ for(const version in routes){
                 })
                 console.log('Route loaded:', path)
                 route.actions.forEach( action => {
-                    if(!/min|max/.test(action)){
-                        const actionPath = path + action + '/'
-                        router.route(actionPath).get(( req, res ) => { setHeaders(res)
-                            return controller[version][action]( req, res, route.conditions )
-                        })
-                        console.log('Route loaded:', actionPath)
-                    }else{
-                        ['first','last','low','high','count'].forEach( subAction => {
-                            const actionPath = path + action + '/' + subAction + '/'
-                            router.route(actionPath).get(( req, res ) => { setHeaders(res)
-                                return controller[version][subAction + action[0].toUpperCase() + action.slice(1)]( req, res, route.conditions )
-                            })
-                            console.log('Route loaded:', actionPath)
-                        })
-                    }
+                    const actionPath = path + action + '/'
+                    router.route(actionPath).get(( req, res ) => { setHeaders(res)
+                        return controller[version][action]( req, res, route.conditions )
+                    })
+                    console.log('Route loaded:', actionPath)
                 })
             })
         })
