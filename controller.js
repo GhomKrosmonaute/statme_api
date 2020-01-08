@@ -1,6 +1,7 @@
 
 const Discord       = require('discord.js')
 const mysql         = require('mysql2')
+const log           = require('log-to-file')
 const docs          = require('./docs').v1
 const config        = require('./config.json')
 
@@ -19,7 +20,7 @@ module.exports.v1 = {
 }
 
 function resolve( res, query ){
-    db.query( query,( err, results, fields ) => {
+    log(query); db.query( query,( err, results, fields ) => {
         if(err){ console.error(err.message)
             res.status(500).json({ error: 'request error' })
         } else res.status(200).json( prepare(results) )

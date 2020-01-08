@@ -9,6 +9,7 @@
   "author": "ghom",
   "license": "ISC",
   "dependencies": {
+    "log-to-file": "^2.0.2",
     "discord.js": "^11.5.1",
     "express": "^4.17.1",
     "mysql": "^2.17.1"
