@@ -24,7 +24,7 @@ function resolve( res, query ){
         if(err){ console.error(err.message)
             res.status(500).json({ error: 'request error' })
         } else res.status(200).json( prepare(results) )
-        console.log( err ? 'Error:' : 'Valid:', query )
+        console.log( '\t', err ? 'Error:' : 'Valid:', query )
     })
 }
 
@@ -40,7 +40,6 @@ function fetch( req, res, conditions, keywords ){
     if(keywords.includes('last'))  order = 'ORDER BY `created_timestamp` DESC LIMIT 1'
 
     const where = conditions.slice(0)
-    console.log(req.params)
     for(const param in req.params){
         const doc = docs.props.find( d => d.name === param )
         const value = docs.types[doc.type].validation(req.params[param])
