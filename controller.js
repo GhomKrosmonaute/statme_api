@@ -2,21 +2,36 @@
 const Discord       = require('discord.js')
 const mysql         = require('mysql2')
 const log           = require('log-to-file')
-const docs          = require('./docs').v1
 const config        = require('./config.json')
 
 const client = new Discord.Client(); client.login(config.token)
 const db = mysql.createConnection(config.database); db.connect()
 
-module.exports.v1 = {
-    fetch: fetch,
-    last: last,
-    first: first,
-    count: count,
-    min: min,
-    max: max,
-    low: low,
-    high: high,
+module.exports = ( req, res, resolvedPath ) => {
+
+    if(!Array.isArray(conditions)) conditions = []
+
+    let select = keyword === 'count' ? 'COUNT(`index`) AS `count`' : '*'
+
+    let order = ''
+    if(keyword === 'first') order = 'ORDER BY `created_timestamp` ASC LIMIT 1'
+    if(keyword === 'last')  order = 'ORDER BY `created_timestamp` DESC LIMIT 1'
+
+    const where = conditions.slice(0)
+    for(const param in req.params){
+        if(/^\d{18,}$/.test(req.params[param]))
+        const value = `'${req.params[param]}'`
+        if(value === false) return res.status(403).json({ error: `incorrect ${param} (${doc.type})` })
+        let sign = '=';
+        if(keyword === 'min') sign = '>='
+        if(keyword === 'max') sign = '<='
+        if(keyword === 'low') order = 'ORDER BY `' + doc.corresponding + '` ASC LIMIT 1'
+        if(keyword === 'high') order = 'ORDER BY `' + doc.corresponding + '` DESC LIMIT 1'
+        where.push(`\`${doc.corresponding}\` ${sign} ${value}`)
+    } if(where.length > 0) where[0] = 'WHERE ' + where[0]
+
+    resolve( res, `SELECT ${select} FROM \`message\` ${where.join(' AND ')} ${order}`)
+
 }
 
 function resolve( res, query ){
@@ -27,43 +42,6 @@ function resolve( res, query ){
         console.log( '\t', err ? 'Error:' : 'Valid:', query )
     })
 }
-
-function fetch( req, res, conditions, keywords ){
-
-    if(!Array.isArray(conditions)) conditions = []
-    if(!Array.isArray(keywords)) keywords = []
-
-    let select = keywords.includes('count') ? 'COUNT(`index`) AS `count`' : '*'
-
-    let order = ''
-    if(keywords.includes('first')) order = 'ORDER BY `created_timestamp` ASC LIMIT 1'
-    if(keywords.includes('last'))  order = 'ORDER BY `created_timestamp` DESC LIMIT 1'
-
-    const where = conditions.slice(0)
-    for(const param in req.params){
-        const doc = docs.props.find( d => d.name === param )
-        const value = docs.types[doc.type].validation(req.params[param])
-        if(value === false) return res.status(403).json({ error: `incorrect ${param} (${doc.type})` })
-        let sign = '=';
-        if(keywords.includes('min')) sign = '>='
-        if(keywords.includes('max')) sign = '<='
-        if(keywords.includes('low')) order = 'ORDER BY `' + doc.corresponding + '` ASC LIMIT 1'
-        if(keywords.includes('high')) order = 'ORDER BY `' + doc.corresponding + '` DESC LIMIT 1'
-        where.push(`\`${doc.corresponding}\` ${sign} ${value}`)
-    } if(where.length > 0) where[0] = 'WHERE ' + where[0]
-
-    resolve( res, `SELECT ${select} FROM \`message\` ${where.join(' AND ')} ${order}`)
-}
-
-function count( req, res, cond ){ fetch( req, res, cond, ['count'] ) } // number
-function first( req, res, cond ){ fetch( req, res, cond, ['first'] ) } // element
-function last( req, res, cond ){ fetch( req, res, cond, ['last'] ) } // element
-function min( req, res, cond ){ fetch( req, res, cond, ['min'] ) } // list
-function max( req, res, cond ){ fetch( req, res, cond, ['max'] ) } // list
-function low( req, res, cond ){ fetch( req, res, cond, ['low'] ) } // element
-function high( req, res, cond ){ fetch( req, res, cond, ['high'] ) } // element
-
-function temp( req, res ){ res.status(500).json({ error: 'this route is temporarily disabled' }) }
 
 client.on('error', console.error )
 client.once('ready', done => {

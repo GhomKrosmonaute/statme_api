@@ -1,0 +1,633 @@
+{
+    "message": {
+        "all": 0,
+        "first": 0,
+        "last": 0,
+        "count": 0,
+        "id": 0
+    },
+    "user": {
+        "all": 0,
+        "first": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "channel": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            },
+            "guild": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        },
+        "last": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "channel": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            },
+            "guild": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        },
+        "count": 0,
+        "id": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "channel": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            },
+            "guild": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        }
+    },
+    "guild": {
+        "all": 0,
+        "first": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "channel": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            },
+            "user": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        },
+        "last": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "channel": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            },
+            "user": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        },
+        "count": 0,
+        "id": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "channel": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    }
+                },
+                "count": 0
+            },
+            "user": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        }
+    },
+    "channel": {
+        "all": 0,
+        "first": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "user": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        },
+        "last": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "user": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        },
+        "count": 0,
+        "id": {
+            "message": {
+                "all": 0,
+                "first": 0,
+                "last": 0,
+                "count": 0
+            },
+            "user": {
+                "all": 0,
+                "first": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "last": {
+                    "message": {
+                        "all": 0,
+                        "first": 0,
+                        "last": 0,
+                        "count": 0
+                    },
+                    "channel": {
+                        "all": 0,
+                        "first": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "last": {
+                            "message": {
+                                "all": 0,
+                                "first": 0,
+                                "last": 0,
+                                "count": 0
+                            }
+                        },
+                        "count": 0
+                    }
+                },
+                "count": 0
+            }
+        }
+    }
+}

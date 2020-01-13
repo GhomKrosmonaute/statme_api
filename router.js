@@ -1,35 +1,58 @@
 
 const express       = require('express')
 const controller    = require('./controller')
-const routes        = require('./routes')
+const routes        = require('./routes.json')
 
-const routers = {}
-for(const version in routes){
-    routers[version] = (()=>{
-        const router = express.Router()
-        routes[version].forEach( route => {
-            route.aliases.forEach( path => {
-                router.route(path).get(( req, res ) => { setHeaders(res)
-                    return controller[version].fetch( req, res, route.conditions )
-                })
-                console.log('Route loaded:', path)
-                route.actions.forEach( action => {
-                    const actionPath = path + action + '/'
-                    router.route(actionPath).get(( req, res ) => { setHeaders(res)
-                        return controller[version][action]( req, res, route.conditions )
-                    })
-                    console.log('Route loaded:', actionPath)
-                })
-            })
-        })
-        console.log('Router ready:', router.stack.length, 'routes')
-        return router
-    })()
-}
+module.exports = (()=>{
+    const router = express.Router()
+    for(const name1 in routes[v]){
+        for(const action1 in routes[v][name1]){
 
-module.exports = routers
+            addRoute( router, name1, action1 )
 
-function setHeaders(res){
+            let palier = routes[v][name1][action1]
+
+            if(palier){
+                for(const name2 in palier){
+                    for(const action2 in palier[name2]){
+
+                        addRoute( router, name1, action1, name2, action2 )
+
+                        palier = palier[name2][action2]
+
+                        if(palier){
+                            for(const name3 in palier){
+                                for(const action3 in palier[name3]){
+
+                                    addRoute( router, name1, action1, name2, action2, name3, action3 )
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    console.log('Router ready:', router.stack.length, 'routes')
+    return router
+})()
+
+function setHeaders( res ){
     res.setHeader("Access-Control-Allow-Origin", "*")
     res.setHeader("Access-Control-Allow-Header", "Content-Type")
+}
+
+function addRoute( router, ...parts ){
+    const resolved = []
+    parts.forEach(( part, index ) => {
+        resolved.push(part)
+        if(part === 'id'){
+            resolved.push(`:${parts[index-1]}ID`)
+        }
+    })
+    const path = `/${resolved.join('/')}/`
+    router.route().get(( req, res ) => { setHeaders(res)
+        return controller.fetch( req, res, resolved )
+    }); console.log('Route loaded:', path)
 }
