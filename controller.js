@@ -1,36 +1,69 @@
 
 const Discord       = require('discord.js')
 const mysql         = require('mysql2')
-const log           = require('log-to-file')
 const config        = require('./config.json')
 
 const client = new Discord.Client(); client.login(config.token)
 const db = mysql.createConnection(config.database); db.connect()
 
-module.exports = ( req, res, resolvedPath ) => {
+module.exports = ( req, res, route ) => {
 
-    if(!Array.isArray(conditions)) conditions = []
+    "/message/first/"
+        "SELECT COUNT(*) FROM message ORDER BY created_at ASC LIMIT 1"
 
-    let select = keyword === 'count' ? 'COUNT(`index`) AS `count`' : '*'
+    "/user/id/:userID/message/last/"
+        "SELECT * FROM message WHERE author_id = :userID"
 
-    let order = ''
-    if(keyword === 'first') order = 'ORDER BY `created_timestamp` ASC LIMIT 1'
-    if(keyword === 'last')  order = 'ORDER BY `created_timestamp` DESC LIMIT 1'
+    "/guild/first/message/last/"
+        `
+            SELECT m.* FROM message m
+            LEFT JOIN guild g ON message.guild_id = guild.id 
+            ORDER BY g.created_at ASC AND m.created_at DESC LIMIT 1 
+        `
 
-    const where = conditions.slice(0)
-    for(const param in req.params){
-        if(/^\d{18,}$/.test(req.params[param]))
-        const value = `'${req.params[param]}'`
-        if(value === false) return res.status(403).json({ error: `incorrect ${param} (${doc.type})` })
-        let sign = '=';
-        if(keyword === 'min') sign = '>='
-        if(keyword === 'max') sign = '<='
-        if(keyword === 'low') order = 'ORDER BY `' + doc.corresponding + '` ASC LIMIT 1'
-        if(keyword === 'high') order = 'ORDER BY `' + doc.corresponding + '` DESC LIMIT 1'
-        where.push(`\`${doc.corresponding}\` ${sign} ${value}`)
-    } if(where.length > 0) where[0] = 'WHERE ' + where[0]
+    for(const part of route){
 
-    resolve( res, `SELECT ${select} FROM \`message\` ${where.join(' AND ')} ${order}`)
+        if(/^last$/i.test(part)){
+            'ORDER BY `created_at` DESC LIMIT 1'
+        }
+        
+        if(/^(?:message|user|channel|guild)$/){
+            
+        }
+
+        if(part.startsWith(':')){
+            const paramName = part.slice(1)
+            const param = req.params[paramName]
+            if(!param || !/^\d{18,}$/.test(param))
+            return res.status(403).json({ error: `incorrect ${paramName}` })
+            params.push(param)
+        }
+    }
+
+    
+
+    // if(!Array.isArray(conditions)) conditions = []
+
+    // let select = keyword === 'count' ? 'COUNT(`index`) AS `count`' : '*'
+
+    // let order = ''
+    // if(keyword === 'first') order = 'ORDER BY `created_timestamp` ASC LIMIT 1'
+    // if(keyword === 'last')  order = 'ORDER BY `created_timestamp` DESC LIMIT 1'
+
+    // const where = conditions.slice(0)
+    // for(const param in req.params){
+    //     if(/^\d{18,}$/.test(req.params[param]))
+    //     const value = `'${req.params[param]}'`
+    //     if(value === false) return res.status(403).json({ error: `incorrect ${param} (${doc.type})` })
+    //     let sign = '=';
+    //     if(keyword === 'min') sign = '>='
+    //     if(keyword === 'max') sign = '<='
+    //     if(keyword === 'low') order = 'ORDER BY `' + doc.corresponding + '` ASC LIMIT 1'
+    //     if(keyword === 'high') order = 'ORDER BY `' + doc.corresponding + '` DESC LIMIT 1'
+    //     where.push(`\`${doc.corresponding}\` ${sign} ${value}`)
+    // } if(where.length > 0) where[0] = 'WHERE ' + where[0]
+
+    // resolve( res, `SELECT ${select} FROM \`message\` ${where.join(' AND ')} ${order}`)
 
 }
 
