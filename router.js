@@ -8,17 +8,15 @@ module.exports = (()=>{
     for(const name1 in routes){
         for(const action1 in routes[name1]){
 
-            addRoute( router, name1, action1 )
-
             let palier = routes[name1][action1]
+            addRoute( router, name1, action1 )
 
             if(palier){
                 for(const name2 in palier){
                     for(const action2 in palier[name2]){
 
+                        palier = routes[name1][action1][name2][action2]
                         addRoute( router, name1, action1, name2, action2 )
-
-                        palier = palier[name2][action2]
 
                         if(palier){
                             for(const name3 in palier){
