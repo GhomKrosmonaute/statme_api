@@ -5,12 +5,12 @@ const routes        = require('./routes.json')
 
 module.exports = (()=>{
     const router = express.Router()
-    for(const name1 in routes[v]){
-        for(const action1 in routes[v][name1]){
+    for(const name1 in routes){
+        for(const action1 in routes[name1]){
 
             addRoute( router, name1, action1 )
 
-            let palier = routes[v][name1][action1]
+            let palier = routes[name1][action1]
 
             if(palier){
                 for(const name2 in palier){
