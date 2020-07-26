@@ -1,5 +1,5 @@
 
-const { DNS } = require('./constants')
+const { DNS } = require('./config')
 const docs = require('./docs')
 const routes = require('./routes')
 
