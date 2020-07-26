@@ -1,0 +1,7 @@
+config.ts
+config.json
+node_modules
+.idea
+.vscode/
+dist
+sql.log
